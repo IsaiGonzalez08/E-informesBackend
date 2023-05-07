@@ -6,5 +6,5 @@ import lombok.Setter;
 @Getter @Setter
 public class UpdateDocumentRequest {
 
-    private String namedocument;
+    private String name_document;
 }

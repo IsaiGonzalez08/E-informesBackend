@@ -5,6 +5,6 @@ import lombok.Setter;
 
 @Getter @Setter
 public class GetDocumentResponse {
-    private Long iddocument;
-    private String namedocument;
+    private Long id_Document;
+    private String name_Document;
 }

@@ -3,7 +3,6 @@ package com.example.EinformesBack.services;
 import com.example.EinformesBack.controllers.document.dtos.requests.CreateDocumentRequest;
 import com.example.EinformesBack.controllers.document.dtos.requests.UpdateDocumentRequest;
 import com.example.EinformesBack.controllers.document.dtos.responses.GetDocumentResponse;
-import com.example.EinformesBack.controllers.user.dtos.responses.GetUserResponse;
 import com.example.EinformesBack.entities.Document;
 import com.example.EinformesBack.repositories.IDocumentRepository;
 import com.example.EinformesBack.services.interfaces.IDocumentService;
@@ -38,8 +37,8 @@ public class DocumentServiceImpl implements IDocumentService {
     }
     private GetDocumentResponse from(Document document) {
         GetDocumentResponse response = new GetDocumentResponse();
-        response.setIddocument(document.getIddocument());
-        response.setNamedocument(document.getNamedocument());
+        response.setId_Document(document.getId_Document());
+        response.setName_Document(document.getName_Document());
         return response;
     }
     @Override
@@ -49,7 +48,7 @@ public class DocumentServiceImpl implements IDocumentService {
     }
     private Document from(CreateDocumentRequest request) {
         Document document = new Document();
-        document.setNamedocument(request.getNamedocument());
+        document.setName_Document(request.getName_document());
         return document;
     }
     @Override
@@ -59,7 +58,7 @@ public class DocumentServiceImpl implements IDocumentService {
         return from(document);
     }
     private Document update(Document document, UpdateDocumentRequest request) {
-        document.setNamedocument(request.getNamedocument());
+        document.setName_Document(request.getName_document());
         return  repository.save(document);
     }
     private Document findOneAndEnsureExist(Long id) {

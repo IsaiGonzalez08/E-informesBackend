@@ -22,6 +22,20 @@ public class UserServiceImpl implements IUserService {
         return from(id);
     }
 
+    private GetUserResponse from(Long idUser){
+        return repository.findById(idUser)
+                .map(this::from)
+                .orElseThrow(() -> new RuntimeException("El usuario no existe"));
+    }
+
+    private GetUserResponse from(User user) {
+        GetUserResponse response = new GetUserResponse();
+        response.setId_User(user.getId_User());
+        response.setUsername(user.getUsername());
+        response.setEmail(user.getEmail());
+        return response;
+    }
+
     @Override
     public void create(CreateUserRequest request) {
         User user = from(request);
@@ -31,6 +45,7 @@ public class UserServiceImpl implements IUserService {
         User user = new User();
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
+        user.setEmail(request.getEmail());
         return user;
     }
 
@@ -58,6 +73,7 @@ public class UserServiceImpl implements IUserService {
     private User update(User user, UpdateUserRequest request) {
         user.setUsername(request.getUsername());
         user.setPassword(request.getPassword());
+        user.setEmail(request.getEmail());
         return repository.save(user);
     }
 
@@ -67,17 +83,4 @@ public class UserServiceImpl implements IUserService {
                 .orElseThrow(() -> new RuntimeException("El usuario no existe"));
     }
 
-
-    private GetUserResponse from(User user) {
-        GetUserResponse response = new GetUserResponse();
-        response.setIduser(user.getIduser());
-        response.setUsername(user.getUsername());
-        return response;
-    }
-
-    private GetUserResponse from(Long idUser){
-        return repository.findById(idUser)
-                .map(this::from)
-                .orElseThrow(() -> new RuntimeException("El usuario no existe"));
-    }
 }
