@@ -1,5 +1,6 @@
 package com.example.EinformesBack.entities;
 
+import com.example.EinformesBack.entities.pivots.UserDocument;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,5 +18,7 @@ public class User {
     private String password;
     private String email;
 
+    @OneToMany(mappedBy = "user")
+    private List<UserDocument> userDocuments;
 
 }
